@@ -3,9 +3,9 @@
 namespace classes\auth;
 
 
-use classes\exceptions\auth\AutharizeException;
+use classes\exceptions\auth\AuthorizeException;
 
-abstract class Autharization
+abstract class Authorization
 {
 
     public $id;
@@ -40,14 +40,14 @@ abstract class Autharization
     {
         if(!$code)
         {
-            throw new AutharizeException('Не передан код в запрос');
+            throw new AuthorizeException('Не передан код в запрос');
         }
 
         $token = $this->getToken($code);
 
         if(!isset($token['access_token']))
         {
-            throw new AutharizeException('Отсуцтвует токен');
+            throw new AuthorizeException('Отсуцтвует токен');
         }
 
         return $this->getUserInformation($token);

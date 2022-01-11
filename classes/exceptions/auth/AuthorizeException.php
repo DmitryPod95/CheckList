@@ -3,7 +3,7 @@ namespace classes\exceptions\auth;
 
 use Throwable;
 
-class AutharizeException extends \Exception
+class AuthorizeException extends \Exception
 {
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {

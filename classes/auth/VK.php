@@ -2,11 +2,11 @@
 
 namespace classes\auth;
 
-use classes\exceptions\auth\AutharizeException;
+use classes\exceptions\auth\AuthorizeException;
 use classes\log\Log;
 
 include 'config/vk/config.php';
-class VK extends Autharization
+class VK extends Authorization
 {
     const START_VK = array(
         'client_id'=>ID_VK,
@@ -28,7 +28,7 @@ class VK extends Autharization
 
                if(!isset($userInfo['id']))
                {
-                   throw new AutharizeException('не найдет ID пользователя');
+                   throw new AuthorizeException('не найдет ID пользователя');
                }
 
               $this->id = $userInfo['id'];
@@ -37,7 +37,7 @@ class VK extends Autharization
 
               return true;
 
-        }catch (AutharizeException $ex)
+        }catch (AuthorizeException $ex)
         {
             Log::writeLog($ex->getMessage());
             return false;
