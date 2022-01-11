@@ -1,4 +1,7 @@
 <?php
+include_once __DIR__ . '/vendor/autoload.php';
+
+include 'config/vk/config.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,6 +13,8 @@
     <title>Авторизация</title>
 </head>
 <body>
-
+<?php
+    echo $link_vk = '<a href="' . URL_AUTHIRIZED_VK . '?' . urldecode(http_build_query(\classes\auth\VK::START_VK)) . '">Вход через ВК</a>';
+?>
 </body>
 </html>
