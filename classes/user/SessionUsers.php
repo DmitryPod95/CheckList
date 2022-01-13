@@ -49,7 +49,7 @@ class SessionUsers
      * Получение данных о пользователе из сессии
      * @return User|null
      */
-    public static function getDatafromSession(): ? User
+    public static function getDataFromSession(): ? User
     {
         $user = $_SESSION['user'];
 

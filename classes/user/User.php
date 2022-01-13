@@ -19,6 +19,14 @@ class User
     }
 
     /**
+     * Получение id пользователя
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
      * Получение имени пользователя
      * @return string
      */

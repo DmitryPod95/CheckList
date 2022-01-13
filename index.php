@@ -2,8 +2,23 @@
 include_once __DIR__ . '/vendor/autoload.php';
 
 include 'config/vk/config.php';
+
+
 session_start();
 
+
+if(isset($_GET['provider']))
+{
+    if(!\classes\user\SessionUsers::saveDataToSession($_GET['provider']))
+    {
+        \classes\auth\Authorization::redirect('/');
+    }
+}
+
+if(\classes\user\SessionUsers::getDatafromSession())
+{
+    \classes\auth\Authorization::redirect('main');
+}
 ?>
 <!doctype html>
 <html lang="en">

@@ -4,6 +4,7 @@ namespace classes\auth;
 
 class Fabric
 {
+    const VK_PROVIDER = 'vk';
     /**
      * @param $provider
      * @return VK|null - Экземпляр класса Authorization
@@ -12,7 +13,7 @@ class Fabric
     {
         switch ($provider)
         {
-            case 'vk':
+            case self::VK_PROVIDER:
                 $result = new VK();
                 break;
             default:

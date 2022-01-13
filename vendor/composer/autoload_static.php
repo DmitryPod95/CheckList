@@ -27,7 +27,11 @@ class ComposerStaticInit2f33fa24756213e1091d9912c952feb5
         'classes\\auth\\VK' => __DIR__ . '/../..' . '/classes/auth/VK.php',
         'classes\\db\\ConnectDB' => __DIR__ . '/../..' . '/classes/db/ConnectDB.php',
         'classes\\exceptions\\auth\\AuthorizeException' => __DIR__ . '/../..' . '/classes/exceptions/auth/AuthorizeException.php',
+        'classes\\exceptions\\user\\UseGetValueException' => __DIR__ . '/../..' . '/classes/exceptions/user/UseGetValueException.php',
+        'classes\\exceptions\\user\\UserAddValueException' => __DIR__ . '/../..' . '/classes/exceptions/user/UserAddValueException.php',
         'classes\\log\\Log' => __DIR__ . '/../..' . '/classes/log/Log.php',
+        'classes\\user\\SessionUsers' => __DIR__ . '/../..' . '/classes/user/SessionUsers.php',
+        'classes\\user\\User' => __DIR__ . '/../..' . '/classes/user/User.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

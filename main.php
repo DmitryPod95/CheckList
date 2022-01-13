@@ -1,4 +1,18 @@
 <?php
+include_once __DIR__ . '/vendor/autoload.php';
+
+
+session_start();
+?>
+<?php
+
+$user = \classes\user\SessionUsers::getDatafromSession();
+
+if(!$user)
+{
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -11,5 +25,16 @@
 </head>
 <body>
 
+<div class="block_info">
+    <div class="user_info">
+        <?php
+            if($user instanceof \classes\user\User)
+            {
+                echo implode(' ', [$user->getFirstName()],$user->getLastName() );
+            }
+        ?>
+    </div>
+
+</div>
 </body>
 </html>

@@ -12,5 +12,9 @@ return array(
     'classes\\auth\\VK' => $baseDir . '/classes/auth/VK.php',
     'classes\\db\\ConnectDB' => $baseDir . '/classes/db/ConnectDB.php',
     'classes\\exceptions\\auth\\AuthorizeException' => $baseDir . '/classes/exceptions/auth/AuthorizeException.php',
+    'classes\\exceptions\\user\\UseGetValueException' => $baseDir . '/classes/exceptions/user/UseGetValueException.php',
+    'classes\\exceptions\\user\\UserAddValueException' => $baseDir . '/classes/exceptions/user/UserAddValueException.php',
     'classes\\log\\Log' => $baseDir . '/classes/log/Log.php',
+    'classes\\user\\SessionUsers' => $baseDir . '/classes/user/SessionUsers.php',
+    'classes\\user\\User' => $baseDir . '/classes/user/User.php',
 );

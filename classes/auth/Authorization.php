@@ -4,6 +4,7 @@ namespace classes\auth;
 
 
 use classes\exceptions\auth\AuthorizeException;
+use http\Header;
 
 abstract class Authorization
 {
@@ -34,6 +35,12 @@ abstract class Authorization
     public function getLastName(): string
     {
         return $this->lastName;
+    }
+
+    public static function redirect($url)
+    {
+        @header("Location: $url");
+        exit();
     }
 
     protected function getUserInfo($code)
