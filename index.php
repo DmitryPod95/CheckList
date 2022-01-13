@@ -2,6 +2,8 @@
 include_once __DIR__ . '/vendor/autoload.php';
 
 include 'config/vk/config.php';
+session_start();
+
 ?>
 <!doctype html>
 <html lang="en">

@@ -7,7 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'classes\\auth\\Autharization' => $baseDir . '/classes/auth/Autharization.php',
+    'classes\\auth\\Authorization' => $baseDir . '/classes/auth/Authorization.php',
+    'classes\\auth\\Fabric' => $baseDir . '/classes/auth/Fabric.php',
     'classes\\auth\\VK' => $baseDir . '/classes/auth/VK.php',
     'classes\\db\\ConnectDB' => $baseDir . '/classes/db/ConnectDB.php',
+    'classes\\exceptions\\auth\\AuthorizeException' => $baseDir . '/classes/exceptions/auth/AuthorizeException.php',
+    'classes\\log\\Log' => $baseDir . '/classes/log/Log.php',
 );

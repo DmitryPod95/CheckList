@@ -22,9 +22,12 @@ class ComposerStaticInit2f33fa24756213e1091d9912c952feb5
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'classes\\auth\\Autharization' => __DIR__ . '/../..' . '/classes/auth/Autharization.php',
+        'classes\\auth\\Authorization' => __DIR__ . '/../..' . '/classes/auth/Authorization.php',
+        'classes\\auth\\Fabric' => __DIR__ . '/../..' . '/classes/auth/Fabric.php',
         'classes\\auth\\VK' => __DIR__ . '/../..' . '/classes/auth/VK.php',
         'classes\\db\\ConnectDB' => __DIR__ . '/../..' . '/classes/db/ConnectDB.php',
+        'classes\\exceptions\\auth\\AuthorizeException' => __DIR__ . '/../..' . '/classes/exceptions/auth/AuthorizeException.php',
+        'classes\\log\\Log' => __DIR__ . '/../..' . '/classes/log/Log.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
