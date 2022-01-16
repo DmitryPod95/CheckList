@@ -6,12 +6,13 @@ use classes\exceptions\auth\AuthorizeException;
 use classes\log\Log;
 
 include 'config/vk/config.php';
+
 class VK extends Authorization
 {
     const START_VK = array(
-        'client_id'=>ID_VK,
-        'redirect_url'=> URL_VK,
-        'response_type'=>'code'
+        'client_id'     =>ID_VK,
+        'redirect_url'  => URL_VK,
+        'response_type' =>'code'
     );
 
 
@@ -60,19 +61,19 @@ class VK extends Authorization
     protected function getUserInformation($token)
     {
         $params = array(
-          'client_id'=> ID_VK,
-          'uids'=> 'uid, first_name, last_name',
+          'client_id'    => ID_VK,
+          'fields'       => 'id, first_name, last_name',
           'access_token' => $token['access_token'],
-          'v'=> VERSION_VK,
+          'v'            => VERSION_VK,
         );
 
-        $userInfo = json_decode(file_get_contents(URL_ABOUT_USER . '?' . urldecode(http_build_query($params))),true);
+        $userInfo = json_decode(file_get_contents(URL_ABOUT_USER_VK . '?' . urldecode(http_build_query($params))),true);
 
         if(isset($userInfo['response'][0]['id']))
         {
             $userInfo = $userInfo['response'][0];
         }
 
-        return$userInfo;
+        return $userInfo;
     }
 }

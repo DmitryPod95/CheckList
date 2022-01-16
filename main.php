@@ -10,7 +10,7 @@ $user = \classes\user\SessionUsers::getDatafromSession();
 
 if(!$user)
 {
-    header("Location: index.php");
+    header("Location: /");
     exit();
 }
 ?>

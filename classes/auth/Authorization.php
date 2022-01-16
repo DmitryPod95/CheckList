@@ -4,7 +4,7 @@ namespace classes\auth;
 
 
 use classes\exceptions\auth\AuthorizeException;
-use http\Header;
+
 
 abstract class Authorization
 {

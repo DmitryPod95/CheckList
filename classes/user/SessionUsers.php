@@ -4,7 +4,7 @@ namespace classes\user;
 use classes\auth\Authorization;
 use classes\auth\Fabric;
 use classes\exceptions\auth\AuthorizeException;
-use classes\exceptions\user\UseGetValueException;
+use classes\exceptions\user\UserException;
 use classes\log\Log;
 use Exception;
 
@@ -16,7 +16,6 @@ class SessionUsers
      *Сохранение данных о пользователе в сессию
      *@param string $provider
      *@return bool - true, если успешно, false - если нет
-     * @throws AuthorizeException
      */
     public static function saveDataToSession(string $provider): bool
     {
@@ -30,7 +29,7 @@ class SessionUsers
             }
             if(!$userAuth->isAuthorized())
             {
-                throw new AuthorizeException('Не удается найти id пользователя');
+                throw new UserException('Не удается найти id пользователя');
             }
 
             $user = new User($userAuth->getId(), $userAuth->getFirstName(), $userAuth->getLastName());
@@ -57,7 +56,7 @@ class SessionUsers
         {
             if(!$user instanceof User)
             {
-                throw new UseGetValueException('Не удается получить обьект пользователя из сессии');
+                throw new UserException('Не удается получить обьект пользователя из сессии');
             }
 
         }catch (Exception $ex)

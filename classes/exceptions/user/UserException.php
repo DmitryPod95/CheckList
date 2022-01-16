@@ -3,7 +3,7 @@ namespace classes\exceptions\user;
 
 use Throwable;
 
-class UseGetValueException extends \Exception
+class UserException extends \Exception
 {
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
