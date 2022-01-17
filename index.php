@@ -2,17 +2,17 @@
 
 include_once __DIR__ . '/vendor/autoload.php';
 
-include 'config/vk/config.php';
 include 'config/mail/config.php';
+include 'config/yandex/config.php';
 
 session_start();
 
 
 if(isset($_GET['provider']))
 {
-    if(!\classes\user\SessionUsers::saveDataToSession($_GET['provider']))
+    if(\classes\user\SessionUsers::saveDataToSession($_GET['provider']))
   {
-     echo ("Error");
+     \classes\auth\Authorization::redirect('/');
   }
 }
 
@@ -21,7 +21,7 @@ if(isset($_GET['provider']))
 //{
 //    \classes\auth\Authorization::redirect('main');
 //}
-//?>
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,8 +33,8 @@ if(isset($_GET['provider']))
 </head>
 <body>
 <?php
-    echo $link_mail = '<a href="' . URL_AUTHORIZED_MAIL . '?' . urldecode(http_build_query(\classes\auth\Mail::START_MAIL)) . '">Вход через mail</a>';
-    echo $link_vk = '<a href="' . URL_AUTHORIZED_VK . '?' . urldecode(http_build_query(\classes\auth\VK::START_VK)) . '">Вход через ВК</a>';
+    echo $link_mail = '<a href="' . URL_AUTHORIZED_MAIL . '?' . urldecode(http_build_query(\classes\auth\Mail::START_MAIL)) . '">Вход через mail</a><br>';
+    echo $link_yandex = '<a href="' . URL_AUTHORIZED_YANDEX . '?' . urldecode(http_build_query(\classes\auth\Yandex::START_YANDEX)) . '">Вход через Яндекс</a>';
 ?>
 </body>
 </html>
