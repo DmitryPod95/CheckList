@@ -54,7 +54,7 @@ abstract class Authorization
 
         if(!isset($token['access_token']))
         {
-            throw new AuthorizeException('Отсуцтвует токен');
+            throw new AuthorizeException('Отсутствует токен');
         }
 
         return $this->getUserInformation($token);
@@ -63,5 +63,4 @@ abstract class Authorization
     public abstract function isAuthorized();
     protected abstract function getToken($code);
     protected abstract function getUserInformation($token);
-
 }

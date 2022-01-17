@@ -11,6 +11,7 @@ return array(
     'classes\\auth\\Fabric' => $baseDir . '/classes/auth/Fabric.php',
     'classes\\auth\\Mail' => $baseDir . '/classes/auth/Mail.php',
     'classes\\auth\\VK' => $baseDir . '/classes/auth/VK.php',
+    'classes\\auth\\Yandex' => $baseDir . '/classes/auth/Yandex.php',
     'classes\\db\\ConnectDB' => $baseDir . '/classes/db/ConnectDB.php',
     'classes\\exceptions\\auth\\AuthorizeException' => $baseDir . '/classes/exceptions/auth/AuthorizeException.php',
     'classes\\exceptions\\user\\UserException' => $baseDir . '/classes/exceptions/user/UserException.php',

@@ -8,14 +8,14 @@ class User
     private $id;
     private $firstName;
     private $lastName;
-    private $db;
+//    private $db;
 
     function __construct($id, $firstName, $lastName)
     {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->db =  new ConnectDB();
+//        $this->db =  new ConnectDB();
     }
 
     /**

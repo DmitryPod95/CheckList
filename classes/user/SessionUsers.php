@@ -3,6 +3,7 @@ namespace classes\user;
 
 use classes\auth\Authorization;
 use classes\auth\Fabric;
+use classes\auth\Mail;
 use classes\exceptions\auth\AuthorizeException;
 use classes\exceptions\user\UserException;
 use classes\log\Log;
