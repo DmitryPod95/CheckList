@@ -2,6 +2,8 @@
 
 namespace classes\db;
 
+use classes\log\Log;
+
 class ConnectDB
 {
 	private $host;
@@ -28,86 +30,113 @@ class ConnectDB
 	public function add(string $id): bool
 	{
 		try
-		{
-			$connectDB = new PDO("mysql:host={$this->host}; dbname={$this->db}, $this->user, $this->pass, [PDO::ATTR_ERRMODE => PDO:ERRMODE_EXCEPTION]");
+        {
+            $DBConnect = new \PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass, [\PDO::ATTR_ERRMODE=>\PDO::ERRMODE_EXCEPTION]);
 
-			$statement = $connectDB->prepare("INSERT INTO user_db (USER_ID,TEHN_CHECK,START_CHECK) VALUES (":user_id", '' ,'')");
-			$statement->execute(['user_id'->$id]);
+            $stmt = $DBConnect->prepare("INSERT INTO user_checklist (USER_ID, START_CHECK, TEHN_CHECK) VALUES (:user_id, ' ', ' ')" );
+            $stmt->execute(['user_id'=>$id]);
 
-			return true;
+            return true;
 
-		}catch(PDOException $ex)
-		{
-
-		}
+        }catch(\PDOException $ex)
+        {
+            Log::writeLog('Не удалось записать значения в базу данных');
+            return false;
+        }
 	}
 
+    /**Проверка на существования пользователя в базе
+     * @param string $id - id пользователя
+     * @return bool - true - в случае успеха false- если нет
+     */
+    public function getUserByUserId(string $id): bool
+    {
+        try
+        {
+            $DBConnect = new \PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass, [\PDO::ATTR_ERRMODE=>\PDO::ERRMODE_EXCEPTION]);
 
-	/**
-	* Обновление значений в столбце StartCheck
-	*@param id - id пользователя
-	*@param input - полученые значения
-	*@return bool - true - если запись успешна, false - если нет.
-	*/
+            $stmt = $DBConnect->prepare("SELECT COUNT(*) FROM user_checklist WHERE user_id = :user_id");
+            $stmt->execute(['user_id'=>$id]);
 
-	public function UpdateStartCheck(string $id, string $input): bool
-	{
-		try{
+            if($stmt->fetch(\PDO::FETCH_ASSOC))
+            {
+                return true;
+            }
 
-			$connectDB = new PDO("mysql:host={$this->host}; dbname={$this->db}, $this->user, $this->pass, [PDO::ATTR_ERRMODE => PDO:ERRMODE_EXCEPTION]");
+            return false;
+        }catch (\PDOException $ex)
+        {
+            Log::writeLog('Не удалось получить данные о пользователе');
+            return false;
+        }
+    }
 
-			$statement = $connectDB->prepare("UPDATE user_db SET START_CHECK = :start_check WHERE USER_ID = :user_id");
-			$statement->execute(['user_id'=>$id, 'start_check'=> $input]);
+    /**Обновления колонки START_CHECK
+     * @param string $id - id пользователя
+     * @param string $input - состояние чекбоксов
+     * @return bool - true - если успешно, false - если нет
+     */
+    public function updateStartCheck(string $id, string $input): bool
+    {
+        try
+        {
+            $DBConnect = new \PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass, [\PDO::ATTR_ERRMODE=>\PDO::ERRMODE_EXCEPTION]);
 
-			return true;
+            $stmt = $DBConnect->prepare("UPDATE user_checklist SET START_CHECK = :start_check WHERE user_id = :user_id");
+            $stmt->execute(['start_check'=>$input, 'user_id'=>$id]);
 
-		}catch(PDOException $ex)
-		{
-			return false;
-		}
-	}
+            return true;
+        }catch (\PDOException $ex)
+        {
+            Log::writeLog('Не удалось обновить значения в колонке START_CHECK');
+            return false;
+        }
+    }
 
-	/**
-	* Обновление значений в столбце StartCheck
-	*@param id - id пользователя
-	*@param input - полученые значения
-	*@return bool - true - ксли запись успешна, false - если нет.
-	*/
+    /**Обновления колонки TEHN_CHECK
+     * @param string $id - id пользователя
+     * @param string $input - состояние чекбоксов
+     * @return bool - true - если успешно, false - если нет
+     */
+    public function updateTehnCheck(string $id, string $input): bool
+    {
+        try
+        {
+            $DBConnect = new \PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass, [\PDO::ATTR_ERRMODE=>\PDO::ERRMODE_EXCEPTION]);
 
-	public function UpdateTehnCheck(string $id, string $input): bool
-	{
-		try
-		{
-			$connectDB = new PDO("mysql:host={$this->host}; dbname={$this->db}, $this->user, $this->pass, [PDO::ATTR_ERRMODE => PDO:ERRMODE_EXCEPTION]");
+            $stmt = $DBConnect->prepare("UPDATE user_checklist SET TEHN_CHECK = :tehn_check WHERE user_id = :user_id");
+            $stmt->execute(['tehn_check'=>$input, 'user_id'=>$id]);
 
-		$statement = $connectDB->prepare("UPDATE user_db SET TEHN_CHECK = :tehn_check WHERE USER_ID = :user_id");
-		$statement->execute(['user_id'=>$id, 'tenh_check'=> $input]);
+            return true;
+        }catch (\PDOException $ex)
+        {
+            Log::writeLog('Не удалось обновить значения в колонке TEHN_CHECK');
+            return false;
+        }
+    }
 
-		}catch(PDOException $ex)
-		{
+    /**
+     * Получение состояния чекбоксов по id пользователя
+     * @param string $id - id пользователя
+     * @return array|int - ассоциативный массив с данными или -1 в случае неудачи
+     */
+    public function getValuesCheckboxById(string $id)
+    {
+        try
+        {
+            $DBConnect = new \PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->pass, [\PDO::ATTR_ERRMODE=>\PDO::ERRMODE_EXCEPTION]);
 
-		}
-	}
+            $stmt = $DBConnect->prepare("SELECT * FROM user_checklist WHERE user_id = :user_id");
+            $stmt->execute(['user_id'=>$id]);
 
-	/**
-	*Получение значений из базы
-	*@param id - id - пользователя
-	*@return array|int - ассоциативный массив с данными или -1,если неудача
-	*/
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
 
-	public function getValuesInUserId(string $id): bool
-	{
-		try
-		{
-			$connectDB = new PDO("mysql:host={$this->host}; dbname={$this->db}, $this->user, $this->pass, [PDO::ATTR_ERRMODE => PDO:ERRMODE_EXCEPTION]");
-			$statement = $connectDB->prepare("SELECT * FROM user_db WHERE USER_ID = :user_id");
-			$statement->execute(['user_id'=>$id]);
+        }catch (\PDOException $ex)
+        {
+            Log::writeLog('Не удалось получить состояние чеклистов');
+            return -1;
+        }
+    }
 
-			return $statement->fetch(PDO::FETCH_ASSOC);
-			
-		}catch(PDOException $ex)
-		{
-			return -1;
-		}
-	}
+
 }
