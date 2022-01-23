@@ -25,7 +25,6 @@ class ComposerStaticInit2f33fa24756213e1091d9912c952feb5
         'classes\\auth\\Authorization' => __DIR__ . '/../..' . '/classes/auth/Authorization.php',
         'classes\\auth\\Fabric' => __DIR__ . '/../..' . '/classes/auth/Fabric.php',
         'classes\\auth\\Mail' => __DIR__ . '/../..' . '/classes/auth/Mail.php',
-        'classes\\auth\\VK' => __DIR__ . '/../..' . '/classes/auth/VK.php',
         'classes\\auth\\Yandex' => __DIR__ . '/../..' . '/classes/auth/Yandex.php',
         'classes\\db\\ConnectDB' => __DIR__ . '/../..' . '/classes/db/ConnectDB.php',
         'classes\\exceptions\\auth\\AuthorizeException' => __DIR__ . '/../..' . '/classes/exceptions/auth/AuthorizeException.php',
